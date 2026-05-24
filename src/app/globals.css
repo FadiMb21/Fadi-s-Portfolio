@@ -1,0 +1,203 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────
+   LUXURY DESIGN SYSTEM — Fadi Moghrabi Portfolio
+   ───────────────────────────────────────────── */
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #e5e5e5;
+
+  /* Luxury Grays */
+  --graphite: #1a1a1a;
+  --charcoal: #0d0d0d;
+  --matte: #2a2a2a;
+  --brushed-steel: #3a3a3a;
+  --silver: #a0a0a0;
+  --platinum: #c8c8c8;
+  --titanium: #8a8a8a;
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-hover: rgba(255, 255, 255, 0.06);
+  --glass-glow: rgba(255, 255, 255, 0.12);
+
+  /* Subtle accent */
+  --accent: rgba(200, 200, 200, 0.15);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 40px rgba(200, 200, 200, 0.06);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-graphite: var(--graphite);
+  --color-charcoal: var(--charcoal);
+  --color-matte: var(--matte);
+  --color-brushed-steel: var(--brushed-steel);
+  --color-silver: var(--silver);
+  --color-platinum: var(--platinum);
+  --color-titanium: var(--titanium);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* ─── Base Styles ─── */
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--brushed-steel) var(--charcoal);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ─── Custom Scrollbar (Webkit) ─── */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--charcoal);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brushed-steel);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--silver);
+}
+
+/* ─── Selection ─── */
+
+::selection {
+  background: rgba(200, 200, 200, 0.2);
+  color: var(--platinum);
+}
+
+/* ─── Focus ─── */
+
+*:focus-visible {
+  outline: 1px solid var(--silver);
+  outline-offset: 2px;
+}
+
+/* ─── Section Spacing ─── */
+
+.section-padding {
+  padding-top: clamp(5rem, 10vh, 8rem);
+  padding-bottom: clamp(5rem, 10vh, 8rem);
+}
+
+/* ─── Glass Card Utility ─── */
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass:hover {
+  background: var(--glass-hover);
+  border-color: var(--glass-glow);
+  box-shadow: var(--shadow-glow);
+}
+
+/* ─── Typography Utilities ─── */
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* ─── Gradient Text ─── */
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--platinum) 0%, var(--silver) 50%, var(--titanium) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Subtle Grid Background ─── */
+
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ─── Noise Texture Overlay ─── */
+
+.noise-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Animated Gradient Background ─── */
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animated-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+/* ─── Float Animation ─── */
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ─── Pulse Glow ─── */
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
